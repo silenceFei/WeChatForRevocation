@@ -155,6 +155,8 @@ def SaveMsg(msg):
 
 if __name__ == '__main__':
     ClearTimeOutMsg()
+    os.environ['TZ'] = 'Asia/Shanghai'
+    time.tzset()
     if not os.path.exists("./Cache/"):
         os.mkdir("./Cache/")
     itchat.auto_login(hotReload=True)
