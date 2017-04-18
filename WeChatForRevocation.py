@@ -157,5 +157,5 @@ if __name__ == '__main__':
     ClearTimeOutMsg()
     if not os.path.exists("./Cache/"):
         os.mkdir("./Cache/")
-    itchat.auto_login(hotReload=True)
+    itchat.auto_login(hotReload=True, enableCmdQR=2)
     itchat.run()
