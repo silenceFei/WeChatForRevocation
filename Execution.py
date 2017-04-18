@@ -17,13 +17,13 @@ def ViewDeleteFile(action, filename):
         else:
             msg_type = "fil"
 
-        itchat.send("@%s@%s" % (msg_type, r".\\Revocation\\" + filename),
+        itchat.send("@%s@%s" % (msg_type, r"./Revocation/" + filename),
                     toUserName="filehelper")
 
     elif action == r"删除":
         try:
-            if os.path.exists(r".\\Revocation\\" + filename):
-                os.remove(r".\\Revocation\\" + filename)
+            if os.path.exists(r"./Revocation/" + filename):
+                os.remove(r"./Revocation/" + filename)
                 itchat.send("撤回助手：删除附件成功", toUserName='filehelper')
             return
         except:
@@ -31,7 +31,7 @@ def ViewDeleteFile(action, filename):
 
 
 def ClearAttachmentList():
-    filepath = ".\\Revocation\\"
+    filepath = "./Revocation/"
     filelist = os.listdir(filepath)
     if filelist:
         try:
@@ -46,7 +46,7 @@ def ClearAttachmentList():
 
 # 返回撤回附件所有文件名
 def ReturnAttachmentList():
-    filepath = ".\\Revocation\\"
+    filepath = "./Revocation/"
     filelist = os.listdir(filepath)
     if filelist:
         msg_send = r"所有储存的附件如下：%s" % ("\n")

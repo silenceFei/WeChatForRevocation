@@ -23,7 +23,7 @@ def ClearTimeOutMsg():
 
                 # 可下载类消息，并删除相关文件
                 if item['msg_type'] in ['Picture', 'Recording', 'Video', 'Attachment']:
-                    os.remove(".\\Cache\\" + item['msg_content'])
+                    os.remove("./Cache/" + item['msg_content'])
 
 
 def GetMsgFrom(msg):
@@ -68,7 +68,7 @@ def Revocation(msg):
     elif msg['Type'] == 'Picture':
         msg_content = msg['FileName']
         msg['Text'](msg['FileName'])
-        shutil.move(msg_content, r".\\Cache\\")
+        shutil.move(msg_content, r"./Cache/")
     elif msg['Type'] == 'Card':
         msg_content = msg['RecommendInfo']['NickName'] + r" 的名片"
     elif msg['Type'] == 'Map':
@@ -85,15 +85,15 @@ def Revocation(msg):
     elif msg['Type'] == 'Recording':
         msg_content = msg['FileName']
         msg['Text'](msg['FileName'])
-        shutil.move(msg_content, r".\\Cache\\")
+        shutil.move(msg_content, r"./Cache/")
     elif msg['Type'] == 'Attachment':
         msg_content = msg['FileName']
         msg['Text'](msg['FileName'])
-        shutil.move(msg_content, r".\\Cache\\")
+        shutil.move(msg_content, r"./Cache/")
     elif msg['Type'] == 'Video':
         msg_content = msg['FileName']
         msg['Text'](msg['FileName'])
-        shutil.move(msg_content, r".\\Cache\\")
+        shutil.move(msg_content, r"./Cache/")
     elif msg['Type'] == 'Friends':
         msg_content = msg['Text']
 
@@ -117,7 +117,7 @@ def GetSendMsg(old_msg, msg_time_to_user):
     elif old_msg['msg_type'] in ['Picture', 'Recording', 'Video', 'Attachment']:
         msg_send += r"%s存储在当前目录下Revocation文件夹中%s可以通过命令=>查看文件[%s]<=查看" % (
             "\n", "\n", old_msg.get('msg_content', None))
-        shutil.move(r".\\Cache\\" + old_msg['msg_content'], r".\\Revocation\\")
+        shutil.move(r"./Cache/" + old_msg['msg_content'], r"./Revocation/")
     return msg_send
 
 
@@ -142,8 +142,8 @@ def SaveMsg(msg):
         mytime.tm_min.__str__(), mytime.tm_sec.__str__())
 
     # 创建可下载消息内容的存放文件夹，并将暂存在当前目录的文件移动到该文件中
-    if not os.path.exists(".\\Revocation\\"):
-        os.mkdir(".\\Revocation\\")
+    if not os.path.exists("./Revocation/"):
+        os.mkdir("./Revocation/")
 
     msg_id, old_msg = GetOldMsg(msg)
     if old_msg:
@@ -155,7 +155,7 @@ def SaveMsg(msg):
 
 if __name__ == '__main__':
     ClearTimeOutMsg()
-    if not os.path.exists(".\\Cache\\"):
-        os.mkdir(".\\Cache\\")
+    if not os.path.exists("./Cache/"):
+        os.mkdir("./Cache/")
     itchat.auto_login(hotReload=True)
     itchat.run()
